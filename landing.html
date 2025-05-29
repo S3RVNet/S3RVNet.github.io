@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Agency - Real Estate Management RPG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top left, #2a3342, #1a202c); /* Subtle radial gradient */
+            color: #e2e8f0; /* Light text */
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+        .text-agency-primary {
+            color: #f56565; /* A reddish-orange from the logo */
+        }
+        .bg-agency-secondary {
+            background-color: #2d3748; /* A slightly lighter dark for sections */
+        }
+        .btn-primary {
+            background-color: #f56565;
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 12px rgba(245, 101, 101, 0.3); /* Stronger red shadow */
+            position: relative;
+            z-index: 10;
+        }
+        .btn-primary:hover {
+            background-color: #e53e3e;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(245, 101, 101, 0.5);
+        }
+        .feature-icon {
+            color: #f56565;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease;
+        }
+        .feature-item:hover .feature-icon {
+            transform: scale(1.15) rotate(5deg); /* Pop and slight rotate on hover */
+        }
+        .section-card {
+            background-color: #2d3748;
+            border-radius: 1.25rem; /* More rounded corners */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            padding: 2.5rem; /* Increased padding */
+            border: 1px solid rgba(245, 101, 101, 0.2); /* Subtle border */
+            animation: fadeInScale 0.8s ease-out forwards; /* Animation for sections */
+            opacity: 0; /* Start hidden for animation */
+            transform: translateY(20px); /* Start slightly below for animation */
+        }
+        /* Delay animation for subsequent cards */
+        .section-card:nth-child(2) { animation-delay: 0.2s; }
+        .section-card:nth-child(3) { animation-delay: 0.4s; }
+        .section-card:nth-child(4) { animation-delay: 0.6s; }
+        .section-card:nth-child(5) { animation-delay: 0.8s; }
+
+        .property-card {
+            background-color: #1f2937; /* Slightly darker than section-card for contrast */
+            border-radius: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(245, 101, 101, 0.1);
+        }
+        .property-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+        }
+        .logo-container {
+            max-width: 500px; /* Adjust as needed for logo size */
+            margin-bottom: 2rem;
+            animation: popIn 1s ease-out forwards; /* Animation for logo */
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 1rem; /* Rounded corners for the logo image */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); /* Stronger shadow for logo */
+        }
+
+        /* Keyframe Animations */
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 6px 12px rgba(245, 101, 101, 0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 16px rgba(245, 101, 101, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 6px 12px rgba(245, 101, 101, 0.3); }
+        }
+
+        /* Apply text shadow to headings */
+        h1, h2, h3 {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen flex flex-col items-center p-4 sm:p-6 lg:p-8">
+
+        <header class="w-full max-w-6xl flex justify-between items-center py-4 px-6 section-card mb-8">
+            <div class="text-3xl font-extrabold text-agency-primary tracking-wide">THE AGENCY</div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#features" class="text-gray-300 hover:text-agency-primary transition duration-300 text-lg font-medium">Features</a></li>
+                    <li><a href="https://discord.gg/c4Khhg9N3u" target="_blank" class="text-gray-300 hover:text-agency-primary transition duration-300 text-lg font-medium">Join the Community</a></li>
+                    <li><a href="#wishlist" class="text-gray-300 hover:text-agency-primary transition duration-300 text-lg font-medium">Wishlist</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="w-full max-w-6xl section-card mb-12 flex flex-col items-center text-center">
+            <div class="logo-container">
+                <!--
+                    TO USE YOUR LOGO:
+                    1. If hosted online: Replace the 'src' attribute below with the direct URL to your image (e.g., src="https://yourdomain.com/img/TransparentHeader.png").
+                    2. If using Base64: Convert your 'TransparentHeader.png' file to a Base64 string using an online converter. Then, replace the 'src' attribute with "data:image/png;base64,YOUR_BASE64_STRING_HERE".
+                -->
+                <img src="https://i.ibb.co/B5Cz1VBy/Transparent-Header.png"
+                     alt="The Agency Game Logo">
+            </div>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight text-agency-primary mb-4 drop-shadow-lg">
+                Your Agency<br class="hidden sm:inline"> Your Market<br class="hidden sm:inline"> Your Empire.
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl">
+                A groundbreaking Real Estate Management RPG, coming soon to Steam.
+            </p>
+            <a href="#wishlist" class="btn-primary inline-block text-xl px-8 py-3">
+                <i class="fab fa-steam-symbol mr-3 text-2xl"></i> Add to Wishlist Now!
+            </a>
+        </section>
+
+        <section id="about" class="w-full max-w-6xl section-card mb-12 text-center">
+            <h2 class="text-4xl font-bold text-agency-primary mb-6">🏠 Welcome to The Agency – Where Every Property Holds a Story (and a Fortune!) 💰</h2>
+            <p class="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                Tired of the same old fantasy quests and space battles? Ready to conquer the real world... one property at a time?
+                <strong class="text-agency-primary">The Agency</strong> is a groundbreaking Real Estate Management RPG that puts you in the shoes of a budding property Agent.<br class="hidden sm:inline"><br class="hidden sm:inline">
+                <span class="font-semibold text-gray-200">As a newly minted agent, you'll be tasked with valuing properties, securing agency agreements, setting favorable terms, and fiercely competing with other agents to list, market, and sell properties to grow your market share.</span>
+                <br class="hidden sm:inline"><br class="hidden sm:inline">From fixer-uppers to luxury penthouses, your empire awaits!
+            </p>
+        </section>
+
+        <section id="features" class="w-full max-w-6xl section-card mb-12 text-center">
+            <h2 class="text-4xl font-bold text-agency-primary mb-10">🔑 Key Features – Unlock Your Inner Property Mogul:</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-xl feature-item">
+                    <i class="fas fa-handshake feature-icon"></i>
+                    <h3 class="text-2xl font-semibold text-gray-100 mb-3">Value & Secure Agreements</h3>
+                    <p class="text-gray-400">Master the art of property valuation, then negotiate and sign lucrative agency agreements, setting your terms to maximize commission and market presence.</p>
+                </div>
+                <div class="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-xl feature-item">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3 class="text-2xl font-semibold text-gray-100 mb-3">Dynamic Market & Competition</h3>
+                    <p class="text-gray-400">Navigate a constantly shifting real estate market. Outmaneuver rival agents, predict trends, and strategically list and market properties to dominate neighborhoods.</p>
+                </div>
+                <div class="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-xl feature-item">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3 class="text-2xl font-semibold text-gray-100 mb-3">Online Community & Influence</h3>
+                    <p class="text-gray-400">The market is alive! Engage with an interconnected online community. Yours and others performance and interactions directly impact a shared market</p>
+                </div>
+                <div class="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-xl feature-item">
+                    <i class="fas fa-bullhorn feature-icon"></i>
+                    <h3 class="text-2xl font-semibold text-gray-100 mb-3">Listing & Marketing Mastery</h3>
+                    <p class="text-gray-400">Craft compelling listings, utilize cutting-edge marketing strategies, and host open houses to attract the perfect buyer and secure the best deals.</p>
+                </div>
+                <div class="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-xl feature-item">
+                    <i class="fas fa-building feature-icon"></i>
+                    <h3 class="text-2xl font-semibold text-gray-100 mb-3">Grow Your Market Share</h3>
+                    <p class="text-gray-400">Every successful sale expands your influence. Strategically expand your operations, open new branches, and corner the market, one property at a time.</p>
+                </div>
+                <div class="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-md transition transform hover:scale-105 hover:shadow-xl feature-item">
+                    <i class="fas fa-paint-roller feature-icon"></i>
+                    <h3 class="text-2xl font-semibold text-gray-100 mb-3">Deep Customization</h3>
+                    <p class="text-gray-400">Personalize your agency, upgrade your office and tools.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="properties" class="w-full max-w-6xl section-card mb-12 text-center">
+            <h2 class="text-4xl font-bold text-agency-primary mb-10">📍 Featured Properties (Just a Taste of What Awaits!)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="property-card">
+                    <img src="https://i.ibb.co/HT3xqmQZ/Gemini-Generated-Image-5hfhug5hfhug5hfh.jpg"
+                         alt="The Damp Dungeon"
+                         class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-100 mb-2">"The Damp Dungeon"</h3>
+                        <p class="text-gray-400 text-sm mb-4">1 Bed, 1 Bath, "Characterful" (Needs Work!)</p>
+                        <p class="text-gray-300 leading-relaxed">A truly unique opportunity for the visionary investor! Boasting original mold features and an authentic leaky roof experience. Prime location... if you like being near the sewers. Great potential for creative conversion (into anything but a habitable living space).</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <img src="https://i.ibb.co/hxdMHLkn/Gemini-Generated-Image-mriu4ymriu4ymriu.jpg"
+                         alt="The Student Slumlord's Dream"
+                         class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-100 mb-2">"The Student Slumlord's Dream"</h3>
+                        <p class="text-gray-400 text-sm mb-4">5 Beds, 2 Baths, High ROI (Questionable Neighbours)</p>
+                        <p class="text-gray-300 leading-relaxed">Perfect for maximizing rental income! Strategically located near the university, this property offers a vibrant community feel (and late-night parties). Tenants included (sometimes). Don't ask about the stains.</p>
+                    </div>
+                </div>
+                <div class="property-card">
+                    <img src="https://i.ibb.co/wkkYvtJ/Gemini-Generated-Image-ymnchkymnchkymnc.jpg"
+                         alt="Luxury Penthouse Paradise"
+                         class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold text-gray-100 mb-2">"Luxury Penthouse Paradise"</h3>
+                        <p class="text-gray-400 text-sm mb-4">3 Beds, 3 Baths, Stunning Views (High Maintenance!)</p>
+                        <p class="text-gray-300 leading-relaxed">Elevate your lifestyle (and your debt!) with this exclusive top-floor abode. Panoramic city views, bespoke fittings, and a concierge who judges your life choices. Perfect for showing off to rivals. Gold-plated taps not included (yet).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="wishlist" class="w-full max-w-6xl section-card mb-12 text-center">
+            <h2 class="text-4xl font-bold text-agency-primary mb-6">🗓️ Coming Soon to Steam!</h2>
+            <p class="text-xl text-gray-300 mb-8">
+                <strong class="text-agency-primary">Add The Agency to your Steam Wishlist NOW!</strong><br class="hidden sm:inline"><br class="hidden sm:inline"> Don't miss out on the opportunity to build your real estate empire.
+            </p>
+            <a href="https://store.steampowered.com/wishlist/" target="_blank" class="btn-primary text-2xl flex items-center justify-center mx-auto max-w-xs animate-pulse-once">
+                <i class="fab fa-steam-symbol mr-4 text-3xl"></i> Add to Wishlist
+            </a>
+        </section>
+
+        <footer class="w-full max-w-6xl section-card p-8 text-center">
+            <h3 class="text-2xl font-bold text-agency-primary mb-4">📧 Stay Connected!</h3>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-300 hover:text-agency-primary transition duration-300 text-3xl"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-300 hover:text-agency-primary transition duration-300 text-3xl"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-gray-300 hover:text-agency-primary transition duration-300 text-3xl"><i class="fab fa-instagram"></i></a>
+                <a href="https://discord.gg/c4Khhg9N3u" target="_blank" class="text-gray-300 hover:text-agency-primary transition duration-300 text-3xl"><i class="fab fa-discord"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 S3RVStudios. All Rights Reserved. Not affiliated with any actual property listing websites or agencies. Any resemblance to real-life property nightmares is purely coincidental (or entirely intentional).
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
